@@ -10,5 +10,5 @@ cd "$parent_path"
 \cp update.sh ~/update.sh
 \cp lcd ~/lcd
 
-source ~/update.sh
+source ~/update.sh &
 echo "update.sh completed"
