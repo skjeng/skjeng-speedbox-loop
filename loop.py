@@ -28,13 +28,14 @@ def lcd_output(lcdpath, str1, str2):
 def check_github():
     check_github_full_path = "/root/skjeng-speedbox-loop/check_github.sh"
     p = subprocess.Popen([check_github_full_path], stdout=subprocess.PIPE)
-    if 'up-to-date\n' == p[0]:
+    msg = p.communicate()
+    if 'up-to-date\n' == msg[0]:
         print("up to date")
         return 0
-    if b'req pull\n' == p[0]:
+    if b'req pull\n' == msg[0]:
         print("need pull")
         return 1
-    if b'req push\n' == p[0]:
+    if b'req push\n' == msg[0]:
         print("need push, this is wrong")
         return 2
     else: 
