@@ -2,7 +2,6 @@
 # Cron job runs this from time to time
 
 echo "update.sh"
-
 systemctl stop speedbox
 echo "stopped speedbox"
 
@@ -18,32 +17,12 @@ if [ ! -d "skjeng-speedbox-loop" ]; then
 fi
 
 cd skjeng-speedbox-loop
-git remote update
+echo "Pulling skjeng-speedbox-loop..."
 
-LOCAL=$(git rev-parse @)
-REMOTE=$(git rev-parse @{u})
-BASE=$(git merge-base @ @{u})
-
-if [ $LOCAL = $REMOTE ]; then
-    echo "Up-to-date"
-
-    cd "$parent_path"
-    ./lcd "Software" "OK"
-    cd skjeng-speedbox-loop
-
-elif [ $LOCAL = $BASE ]; then
-    echo "Need to pull"
-    echo "Pulling skjeng-speedbox-loop..."
-    
-    cd "$parent_path"
-    ./lcd "Pulling" "update..."
-    cd skjeng-speedbox-loop
-    git pull
-elif [ $REMOTE = $BASE ]; then
-    echo "Need to push, should never happen!"
-else
-    echo "Diverged"
-fi
+cd "$parent_path"
+./lcd "Pulling" "update..."
+cd skjeng-speedbox-loop
+git pull
 
 make
 if [ ! -f "lcd" ]; then
