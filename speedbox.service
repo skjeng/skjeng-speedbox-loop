@@ -1,0 +1,10 @@
+[Unit]
+Description=Bandwidth Monitor Loop
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+ExecStart=/root/skjeng-speedbox-loop/loop.py
+
+[Install]
+WantedBy=multi-user.target

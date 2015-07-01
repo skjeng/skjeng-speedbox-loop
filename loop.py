@@ -10,8 +10,8 @@ import numpy
 import struct
 import requests
 
-lcd_full_path = "/root/skjeng-speedbox-housekeeping/lcd"
-update_full_path = "/root/skjeng-speedbox-housekeeping/update.sh"
+lcd_full_path = "/root/skjeng-speedbox-loop/lcd"
+update_full_path = "/root/skjeng-speedbox-loop/update.sh"
 upload_full_path = "/root/skjeng-speedbox-loop/upload.sh"
 download_full_path = "/root/skjeng-speedbox-loop/download.sh"
 target_ip = 'speedtest.hydracloud.no'
