@@ -25,6 +25,11 @@ def lcd_output(lcdpath, str1, str2):
     p = subprocess.Popen([lcdpath, str1.ljust(16), str2.ljust(16)], stdout=subprocess.PIPE)
     #print(p.communicate())
 
+def check_github():
+    check_github_full_path = "/root/skjeng-speedbox-loop/check_github.sh"
+    p = subprocess.Popen([check_github_full_ath, stdout=subprocess.PIPE)
+    print(p.communicate())
+
 def update(update_path):
     f.write('update run start')
     p = subprocess.Popen([update_path], stdout=None)
@@ -91,6 +96,9 @@ def main(argv=None):
                 print ("Button 2 was pushed, updating python script")
                 time.sleep(1)
                 lcd_output(lcd_full_path,  "CHECKING", "SOFTWARE")
+                
+                check_github()
+                quitloop()
                 time.sleep(1)
                 data = update(update_full_path)
                 lcd_output(lcd_full_path,  "UPD RET", "data")
