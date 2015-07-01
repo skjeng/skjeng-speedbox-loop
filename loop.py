@@ -11,6 +11,7 @@ import struct
 import requests
 
 lcd_full_path = "/root/skjeng-speedbox-housekeeping/lcd"
+update_full_path = "/root/skjeng-speedbox-housekeeping/update.sh"
 upload_full_path = "/root/skjeng-speedbox-loop/upload.sh"
 download_full_path = "/root/skjeng-speedbox-loop/download.sh"
 target_ip = 'speedtest.hydracloud.no'
@@ -18,8 +19,11 @@ results_ip = 'bayonette.royrvik.org'
 results_port = 80
 
 def lcd_output(lcdpath, str1, str2):
-    p = subprocess.Popen([lcdpath, str1, str2], stdout=subprocess.PIPE)
+    p = subprocess.Popen([lcdpath, str1.ljust(16), str2.ljust(16)], stdout=subprocess.PIPE)
     #print(p.communicate())
+
+def update(update_path):
+    p = subprocess.Popen([update_path], stdout=subprocess.PIPE)
 
 def iperf(checkpath, ip):
     p = subprocess.Popen([checkpath, ip], stdout=subprocess.PIPE)
@@ -64,20 +68,28 @@ def main(argv=None):
             lcd_output(lcd_full_path,  "SCRIPT ABORTED", my_ip)
             time.sleep(1)
             exit()
+
+        if lcd_button(lcd_full_path) == 2:
+            lcd_output(lcd_full_path,  "UPDATING", "SOFTWARE")
+            update(update_full_path)
+            time.sleep(1)
+            exit()
         if '127.0.0.' not in my_ip:
             lcd_output(lcd_full_path,  "Got full IP", my_ip)
             time.sleep(1)
             print('LCD'+str(lcd_button(lcd_full_path))) 
-            lcd_output(lcd_full_path, "PERFORMING TEST ", "PLEASE WAIT.....")
+            lcd_output(lcd_full_path, "Testing up", "PLEASE WAIT.....")
             mean_upload = int(numpy.around(iperf(upload_full_path, target_ip)))
+            lcd_output(lcd_full_path, "Testing down", "PLEASE WAIT.....")
             mean_download = int(numpy.around(iperf(download_full_path, target_ip)))
+            lcd_output(lcd_full_path, "Testing lat", "PLEASE WAIT.....")
             status = 'U'+str(mean_upload)+' D'+str(mean_download)
             lcd_output(lcd_full_path, "Testresults", status)
             time.sleep(10)
             upload_results(mean_upload, mean_download, 1, results_ip, results_port)
             lcd_output(lcd_full_path, "Uploading results", "to server")
             time.sleep(1)
-            lcd_output(lcd_full_path,  "SHUTTING", "DOWN")
+            lcd_output(lcd_full_path,  "SHUT", "DOWN")
             time.sleep(1)
             os.system("shutdown now -h")
 
