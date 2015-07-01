@@ -56,6 +56,8 @@ def upload_results(up,down,lat, ip, port):
     print(r.text)
 
 def main(argv=None):
+    lcd_output(lcd_full_path, "Speedbox", "Running")
+    time.sleep(1)
     i = 0
     while True:
         my_ip = socket.gethostbyname(socket.gethostname())
@@ -84,9 +86,11 @@ def main(argv=None):
             mean_download = int(numpy.around(iperf(download_full_path, target_ip)))
             lcd_output(lcd_full_path, "Testing lat", "PLEASE WAIT.....")
             status = 'U'+str(mean_upload)+' D'+str(mean_download)
+            time.sleep(1)
             lcd_output(lcd_full_path, "Testresults", status)
             time.sleep(10)
             upload_results(mean_upload, mean_download, 1, results_ip, results_port)
+            time.sleep(1)
             lcd_output(lcd_full_path, "Uploading results", "to server")
             time.sleep(1)
             lcd_output(lcd_full_path,  "SHUT", "DOWN")
