@@ -34,13 +34,13 @@ def update(update_path):
     f.write('update run start')
     p = subprocess.Popen([update_path], stdout=None)
     f.write('update run after')
-    if 'up-to-date' == p[0]:
+    if 'up-to-date\n' == p[0]:
         print("up to date")
         return 0
-    if b'req pull' == p[0]:
+    if b'req pull\n' == p[0]:
         print("need pull")
         return 1
-    if b'req push' == p[0]:
+    if b'req push\n' == p[0]:
         print("need push, this is wrong")
         return 2
     else: 
