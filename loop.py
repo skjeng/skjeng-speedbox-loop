@@ -10,9 +10,9 @@ import numpy
 import struct
 import requests
 
-lcd_full_path = "/root/cosytech-cosyperf/lcd"
-upload_full_path = "/root/cosytech-cosyperf/upload.sh"
-download_full_path = "/root/cosytech-cosyperf/download.sh"
+lcd_full_path = "/root/skjeng-speedbox-housekeeping/lcd"
+upload_full_path = "/root/skjeng-speedbox-loop/upload.sh"
+download_full_path = "/root/skjeng-speedbox-loop/download.sh"
 target_ip = 'speedtest.hydracloud.no'
 results_ip = 'bayonette.royrvik.org'
 results_port = 80
