@@ -55,7 +55,8 @@ fi
 cd "$parent_path"
 
 systemctl daemon-reload
-
+rm update.sh
+rm lcd
 systemctl start speedbox
 echo "started speedbox"
 echo "update.sh done"
