@@ -23,7 +23,7 @@ def lcd_output(lcdpath, str1, str2):
     #print(p.communicate())
 
 def update(update_path):
-    p = subprocess.Popen([update_path], stdout=subprocess.PIPE)
+    p = subprocess.Popen([update_path], stdout=None)
 
 def iperf(checkpath, ip):
     p = subprocess.Popen([checkpath, ip], stdout=subprocess.PIPE)
