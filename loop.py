@@ -100,27 +100,30 @@ def main(argv=None):
         i = i + 1
         if lcd_button(lcd_full_path) == 1:
             print ("Button 1 was pushed, aborting python script")
-            lcd_output(lcd_full_path,  "SCRIPT ABORTED", my_ip)
+            lcd_output(lcd_full_path,  "BTN1: aborted", my_ip)
             time.sleep(1)
             quitloop()
 
         if '127.0.0.' not in my_ip:
             lcd_output(lcd_full_path,  "Got full IP", my_ip)
+            time.sleep(1)
+            lcd_output(lcd_full_path,  "checking for", "new version") 
             if lcd_button(lcd_full_path) == 2:
                 print ("Button 2 was pushed, updating python script")
-                time.sleep(1)
-                lcd_output(lcd_full_path,  "CHECKING", "SOFTWARE") 
-                if check_github() == 0:
+                lcd_output(lcd_full_path,  "BTN2:", "skip sw check") 
+            else:
+                state = check_github()
+                if state == 0:
                     time.sleep(1)
-                    lcd_output(lcd_full_path,  "UP TO DATE", "NO ACTION") 
+                    lcd_output(lcd_full_path,  "Up to date", "no action") 
                     time.sleep(1)
-                elif check_github() == 1:
+                elif state == 1:
                     time.sleep(1)
-                    lcd_output(lcd_full_path,  "PULL REQ", "updating") 
+                    lcd_output(lcd_full_path,  "Pull required", "updating") 
                     time.sleep(1)
                     update(update_full_path)
                     time.sleep(1)
-                    lcd_output(lcd_full_path,  "QUIT LOOP", "updating") 
+                    lcd_output(lcd_full_path,  "Quitting", "loop") 
                     time.sleep(1)
                     quitloop()
                 else:
