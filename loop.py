@@ -18,12 +18,15 @@ target_ip = 'speedtest.hydracloud.no'
 results_ip = 'bayonette.royrvik.org'
 results_port = 80
 
+f = open('~/logfile.txt', 'a')
+
+
 def lcd_output(lcdpath, str1, str2):
     p = subprocess.Popen([lcdpath, str1.ljust(16), str2.ljust(16)], stdout=subprocess.PIPE)
     #print(p.communicate())
 
 def update(update_path):
-    p = subprocess.Popen([update_path], stdout=subprocess.PIPE)
+    p = subprocess.Popen([update_path], stdout=f)
     return p.communicate()
 
 def iperf(checkpath, ip):
@@ -56,6 +59,15 @@ def upload_results(up,down,lat, ip, port):
     r = requests.post('http://'+str(ip)+':'+str(port), data)
     print(r.text)
 
+def quitloop():
+    f.write('quitting loop')
+    f.close()
+    print("Quitting loop")
+    time.sleep(1)
+    lcd_output(lcd_full_path,  "quitting", "loop")
+    time.sleep(1)
+    exit()
+
 def main(argv=None):
     lcd_output(lcd_full_path, "Speedbox", "Running")
     time.sleep(1)
@@ -70,7 +82,7 @@ def main(argv=None):
             print ("Button 1 was pushed, aborting python script")
             lcd_output(lcd_full_path,  "SCRIPT ABORTED", my_ip)
             time.sleep(1)
-            exit()
+            quitloop()
 
         if '127.0.0.' not in my_ip:
             lcd_output(lcd_full_path,  "Got full IP", my_ip)
@@ -82,7 +94,7 @@ def main(argv=None):
                 data = update(update_full_path)
                 lcd_output(lcd_full_path,  "UPD RET", data)
                 time.sleep(1)
-                exit()
+                quitloop()
             time.sleep(1)
             print('LCD'+str(lcd_button(lcd_full_path))) 
             lcd_output(lcd_full_path, "Testing up", "PLEASE WAIT.....")
@@ -104,7 +116,7 @@ def main(argv=None):
                 print ("Button 1 was pushed, aborting python script")
                 lcd_output(lcd_full_path,  "SCRIPT ABORTED", my_ip)
                 time.sleep(1)
-                exit()
+                quitloop()
             os.system("shutdown now -h")
 
 if __name__ == "__main__":
