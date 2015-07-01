@@ -153,7 +153,7 @@ def main(argv=None):
                 lcd_output(lcd_full_path,  "SCRIPT ABORTED", my_ip)
                 time.sleep(1)
                 quitloop()
-            os.system("shutdown now -h")
+            #os.system("shutdown now -h")
 
 if __name__ == "__main__":
     sys.exit(main())
