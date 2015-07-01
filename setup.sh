@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# NOT RUN THIS
 echo "setup.sh"
 pacman -Syu
 pacman -Sy iperf3
