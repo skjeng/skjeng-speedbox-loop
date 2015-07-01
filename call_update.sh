@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Hello"
+
 parent_path=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
 cd "$parent_path"
 
