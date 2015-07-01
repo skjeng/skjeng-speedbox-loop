@@ -11,7 +11,7 @@ import struct
 import requests
 
 lcd_full_path = "/root/skjeng-speedbox-loop/lcd"
-update_full_path = "/root/skjeng-speedbox-loop/update.sh"
+update_full_path = "/root/skjeng-speedbox-loop/call_update.sh"
 upload_full_path = "/root/skjeng-speedbox-loop/upload.sh"
 download_full_path = "/root/skjeng-speedbox-loop/download.sh"
 target_ip = 'speedtest.hydracloud.no'
