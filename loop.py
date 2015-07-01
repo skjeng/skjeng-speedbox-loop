@@ -52,10 +52,12 @@ def iperf(checkpath, ip):
     output = p.communicate()[0]
     print(len(output))
     if len(output) == 0:
+        time.sleep(1)
         print(output)
         lcd_output(lcd_full_path,  "SCRIPT ERROR", "iperf fail")
-        time.sleep(1)
-        exit()
+        time.sleep(2)
+        lcd_output(lcd_full_path,  "rebooting", "now")
+        os.system("reboot")
     out = output.splitlines()
     print(out)
     out_int = []
