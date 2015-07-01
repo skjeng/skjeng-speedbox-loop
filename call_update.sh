@@ -10,3 +10,4 @@ cd "$parent_path"
 
 source ~/update.sh
 echo "LOLLOLOL"
+echo "LOLLOLOL Ready"
