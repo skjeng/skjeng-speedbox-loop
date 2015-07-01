@@ -28,12 +28,6 @@ def lcd_output(lcdpath, str1, str2):
 def check_github():
     check_github_full_path = "/root/skjeng-speedbox-loop/check_github.sh"
     p = subprocess.Popen([check_github_full_path], stdout=subprocess.PIPE)
-    print(p.communicate())
-
-def update(update_path):
-    f.write('update run start')
-    p = subprocess.Popen([update_path], stdout=None)
-    f.write('update run after')
     if 'up-to-date\n' == p[0]:
         print("up to date")
         return 0
@@ -46,6 +40,11 @@ def update(update_path):
     else: 
         print("Critical fault")
         return -1
+
+def update(update_path):
+    f.write('update run start')
+    p = subprocess.Popen([update_path], stdout=None)
+    f.write('update run after')
 
 def iperf(checkpath, ip):
     p = subprocess.Popen([checkpath, ip], stdout=subprocess.PIPE)
