@@ -44,7 +44,7 @@ def check_github():
 
 def update(update_path):
     f.write('update run start')
-    p = subprocess.Popen(['nohup',update_path], stdout=subprocess.PIPE)
+    p = subprocess.Popen([update_path], stdout=subprocess.PIPE)
     f.write('update run after')
 
 def iperf(checkpath, ip):
