@@ -43,4 +43,4 @@ cd "$parent_path"
 
 #systemctl start speedbox
 echo "started speedbox"
-echo " Finally DONE"
+echo "update.sh done"

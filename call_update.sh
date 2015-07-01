@@ -9,5 +9,4 @@ cd "$parent_path"
 \cp lcd ~/lcd
 
 source ~/update.sh
-echo "LOLLOLOL"
-echo "LOLLOLOL Ready"
+echo "update.sh completed"
