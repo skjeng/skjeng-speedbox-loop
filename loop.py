@@ -26,8 +26,9 @@ def lcd_output(lcdpath, str1, str2):
     #print(p.communicate())
 
 def update(update_path):
-    p = subprocess.Popen([update_path], stdout=f)
-    return p.communicate()
+    f.write('update run start')
+    p = subprocess.Popen([update_path], stdout=None)
+    f.write('update run after')
 
 def iperf(checkpath, ip):
     p = subprocess.Popen([checkpath, ip], stdout=subprocess.PIPE)
@@ -92,7 +93,7 @@ def main(argv=None):
                 lcd_output(lcd_full_path,  "CHECKING", "SOFTWARE")
                 time.sleep(1)
                 data = update(update_full_path)
-                lcd_output(lcd_full_path,  "UPD RET", data)
+                lcd_output(lcd_full_path,  "UPD RET", "data")
                 time.sleep(1)
                 quitloop()
             time.sleep(1)
