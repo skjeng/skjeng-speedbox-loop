@@ -118,6 +118,11 @@ def main(argv=None):
                     time.sleep(1)
                     #data = update(update_full_path)
                     quitloop()
+                else:
+                    time.sleep(1)
+                    lcd_output(lcd_full_path,  "GITHUB ERROR", "Call 91752214") 
+                    time.sleep(10)
+                    quitloop()
             time.sleep(1)
             print('LCD'+str(lcd_button(lcd_full_path))) 
             lcd_output(lcd_full_path, "Testing up", "PLEASE WAIT.....")
