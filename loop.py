@@ -1,5 +1,5 @@
 #!/usr/bin/python2
-# aMain
+#s aMain
 import sys
 import subprocess
 import getopt
