@@ -74,8 +74,9 @@ def main(argv=None):
         if '127.0.0.' not in my_ip:
             lcd_output(lcd_full_path,  "Got full IP", my_ip)
             if lcd_button(lcd_full_path) == 2:
+                print ("Button 2 was pushed, updating python script")
                 time.sleep(1)
-                lcd_output(lcd_full_path,  "UPDATING", "SOFTWARE")
+                lcd_output(lcd_full_path,  "CHECKING", "SOFTWARE")
                 time.sleep(1)
                 update(update_full_path)
                 exit()
@@ -96,6 +97,11 @@ def main(argv=None):
             time.sleep(1)
             lcd_output(lcd_full_path,  "SHUT", "DOWN")
             time.sleep(1)
+            if lcd_button(lcd_full_path) == 1:
+                print ("Button 1 was pushed, aborting python script")
+                lcd_output(lcd_full_path,  "SCRIPT ABORTED", my_ip)
+                time.sleep(1)
+                exit()
             os.system("shutdown now -h")
 
 if __name__ == "__main__":
