@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#
 # This copies and runs the update procedure
 
 echo "update.sh started"
