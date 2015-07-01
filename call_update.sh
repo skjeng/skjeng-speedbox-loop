@@ -1,6 +1,8 @@
 #!/bin/bash
 
-echo "Hello"
+# This copies and runs the update procedure
+
+echo "update.sh started"
 
 parent_path=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
 cd "$parent_path"
