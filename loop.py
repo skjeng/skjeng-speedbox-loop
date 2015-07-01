@@ -107,15 +107,17 @@ def main(argv=None):
             if lcd_button(lcd_full_path) == 2:
                 print ("Button 2 was pushed, updating python script")
                 time.sleep(1)
-                lcd_output(lcd_full_path,  "CHECKING", "SOFTWARE")
-                
-                check_github()
-                quitloop()
-                time.sleep(1)
-                data = update(update_full_path)
-                lcd_output(lcd_full_path,  "UPD RET", "data")
-                time.sleep(1)
-                quitloop()
+                lcd_output(lcd_full_path,  "CHECKING", "SOFTWARE") 
+                if check_github() == 0:
+                    time.sleep(1)
+                    lcd_output(lcd_full_path,  "UP TO DATE", "NO ACTION") 
+                    time.sleep(1)
+                elif check_github() == 1:
+                    time.sleep(1)
+                    lcd_output(lcd_full_path,  "PULL REQ", "updating") 
+                    time.sleep(1)
+                    #data = update(update_full_path)
+                    quitloop()
             time.sleep(1)
             print('LCD'+str(lcd_button(lcd_full_path))) 
             lcd_output(lcd_full_path, "Testing up", "PLEASE WAIT.....")
