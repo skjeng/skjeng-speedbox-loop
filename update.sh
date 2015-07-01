@@ -46,6 +46,12 @@ else
     echo "Diverged"
 fi
 
+make
+if [ ! -f "lcd" ]; then
+	echo "LCD FAILED"
+	exit
+fi
+
 cd "$parent_path"
 
 systemctl daemon-reload
