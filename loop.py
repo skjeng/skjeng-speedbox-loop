@@ -18,7 +18,7 @@ target_ip = 'speedtest.hydracloud.no'
 results_ip = 'bayonette.royrvik.org'
 results_port = 80
 
-f = open('~/logfile.txt', 'a')
+f = open('logfile.txt', 'a')
 
 
 def lcd_output(lcdpath, str1, str2):
