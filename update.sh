@@ -48,6 +48,6 @@ fi
 
 cd "$parent_path"
 
-#systemctl start speedbox
+systemctl start speedbox
 echo "started speedbox"
 echo "update.sh done"
