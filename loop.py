@@ -74,6 +74,7 @@ def main(argv=None):
         if '127.0.0.' not in my_ip:
             lcd_output(lcd_full_path,  "Got full IP", my_ip)
             if lcd_button(lcd_full_path) == 2:
+                time.sleep(1)
                 lcd_output(lcd_full_path,  "UPDATING", "SOFTWARE")
                 time.sleep(1)
                 update(update_full_path)
