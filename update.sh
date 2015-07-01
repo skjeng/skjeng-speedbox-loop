@@ -38,7 +38,6 @@ elif [ $LOCAL = $BASE ]; then
     cd "$parent_path"
     ./lcd "Pulling" "update..."
     cd skjeng-speedbox-loop
-
     git pull
 elif [ $REMOTE = $BASE ]; then
     echo "Need to push, should never happen!"
