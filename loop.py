@@ -119,6 +119,9 @@ def main(argv=None):
                     lcd_output(lcd_full_path,  "PULL REQ", "updating") 
                     time.sleep(1)
                     update(update_full_path)
+                    time.sleep(1)
+                    lcd_output(lcd_full_path,  "QUIT LOOP", "updating") 
+                    time.sleep(1)
                     quitloop()
                 else:
                     time.sleep(1)
