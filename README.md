@@ -1,2 +1,2 @@
 # bandmon-odroid
-Bandwidth-monitor on the Odroid C4
+Bandwidth-monitor on the Odroid C1
