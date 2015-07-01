@@ -9,11 +9,11 @@ REMOTE=$(git rev-parse @{u})
 BASE=$(git merge-base @ @{u})
 
 if [ $LOCAL = $REMOTE ]; then
-    echo "Up-to-date"
+    echo "up-to-date"
 elif [ $LOCAL = $BASE ]; then
-    echo "Need to pull"
+    echo "req pull"
 elif [ $REMOTE = $BASE ]; then
-    echo "PUSH: NOT OK"
+    echo "req push"
 else
-    echo "Diverged"
+    echo "diverged"
 fi
