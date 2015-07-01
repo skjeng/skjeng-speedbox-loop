@@ -69,13 +69,13 @@ def main(argv=None):
             time.sleep(1)
             exit()
 
-        if lcd_button(lcd_full_path) == 2:
-            lcd_output(lcd_full_path,  "UPDATING", "SOFTWARE")
-            update(update_full_path)
-            time.sleep(1)
-            exit()
         if '127.0.0.' not in my_ip:
             lcd_output(lcd_full_path,  "Got full IP", my_ip)
+            if lcd_button(lcd_full_path) == 2:
+                lcd_output(lcd_full_path,  "UPDATING", "SOFTWARE")
+                time.sleep(1)
+                update(update_full_path)
+                exit()
             time.sleep(1)
             print('LCD'+str(lcd_button(lcd_full_path))) 
             lcd_output(lcd_full_path, "Testing up", "PLEASE WAIT.....")
