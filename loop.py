@@ -27,7 +27,7 @@ def lcd_output(lcdpath, str1, str2):
 
 def check_github():
     check_github_full_path = "/root/skjeng-speedbox-loop/check_github.sh"
-    p = subprocess.Popen([check_github_full_ath, stdout=subprocess.PIPE)
+    p = subprocess.Popen([check_github_full_path], stdout=subprocess.PIPE)
     print(p.communicate())
 
 def update(update_path):
