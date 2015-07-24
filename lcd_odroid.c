@@ -5,10 +5,15 @@
 #include <unistd.h>
 #include <string.h>
 #include <time.h>
- 
-#include <wiringPi.h>
-#include <wiringPiI2C.h>
-#include <wiringSerial.h>
+
+#ifdef __APPLE__
+	/* Do not include any wiringPi libraries on OS X*/
+#elif __unix__
+	#include <wiringPi.h>
+	#include <wiringPiI2C.h>
+	#include <wiringSerial.h>
+#endif
+
 #include <lcd.h>
 
 //------------------------------------------------------------------------------------------------------------
