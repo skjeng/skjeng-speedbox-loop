@@ -17,5 +17,5 @@
 
 int main(){
 	printf("LCD Panel Control Program\n");
-	led_init();
+	return 0;
 }

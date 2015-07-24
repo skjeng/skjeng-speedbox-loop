@@ -10,36 +10,57 @@ import numpy
 import struct
 import requests
 
-lcd_full_path = "/root/skjeng-speedbox-loop/lcd"
-update_full_path = "/root/skjeng-speedbox-loop/call_update.sh"
-upload_full_path = "/root/skjeng-speedbox-loop/upload.sh"
-download_full_path = "/root/skjeng-speedbox-loop/download.sh"
-target_ip = 'speedtest.hydracloud.no'
+lcd_script = "lcd_program"
+update_script = "call_update.sh"
+upload_script = "upload.sh"
+download_script = "download.sh"
+check_github_script = "check_github.sh"
+
+#target_ip = 'speedtest.hydracloud.no'
+target_ip = '127.0.0.1'
 results_ip = 'bayonette.royrvik.org'
 results_port = 80
 
-f = open('/root/logfile.txt', 'a')
+f = open('logfile.txt', 'a')
+
+cwd = os.getcwd()
+print(cwd)
+
+def popen( program, *arg ):
+    popen_target_list = [ cwd+'/'+program ]
+    msg = ""
+    for argument in arg:
+        popen_target_list.append( argument )
+    try:
+        p = subprocess.Popen( popen_target_list, stdout=subprocess.PIPE )
+        msg = p.communicate()
+    except OSError as e:
+        print "OSError({0}): {1}".format(e.errno, e.strerror)
+        raise
+    except:
+        print "Unexpected error:", sys.exc_info()[0]
+        raise
+    return msg[0]
 
 
-def lcd_output(lcdpath, str1, str2):
+def lcd_output(lcdpath, str1="", str2=""):
     p = subprocess.Popen([lcdpath, str1.ljust(16), str2.ljust(16)], stdout=subprocess.PIPE)
     #print(p.communicate())
 
 def check_github():
-    check_github_full_path = "/root/skjeng-speedbox-loop/check_github.sh"
-    p = subprocess.Popen([check_github_full_path], stdout=subprocess.PIPE)
-    msg = p.communicate()
-    if 'up-to-date\n' == msg[0]:
-        print("up to date")
+    msg = popen(check_github_script)
+    
+    if 'up-to-date\n' == msg:
+        print("check_github()=up to date")
         return 0
-    if b'req pull\n' == msg[0]:
-        print("need pull")
+    if b'req pull\n' == msg:
+        print("check_github()=need pull")
         return 1
-    if b'req push\n' == msg[0]:
-        print("need push, this is wrong")
+    if b'req push\n' == msg:
+        print("check_github()=need push, this is wrong")
         return 2
     else: 
-        print("Critical fault")
+        print("check_github()=critical fault")
         return -1
 
 def update(update_path):
@@ -89,12 +110,16 @@ def quitloop():
     exit()
 
 def main(argv=None):
-    lcd_output(lcd_full_path, "Speedbox", "Running")
+    #lcd_output(lcd_full_path, "Speedbox", "Running")
     time.sleep(1)
     i = 0
     while True:
         my_ip = socket.gethostbyname(socket.gethostname())
         measured_specs = str(i) + 'seconds'
+        print (cwd)
+        check_github()
+        exit()
+
         lcd_output(lcd_full_path,  measured_specs, my_ip)
         time.sleep(1)
         i = i + 1
