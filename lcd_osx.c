@@ -13,7 +13,7 @@ static void lcd_update(){
 }
 
 int lcd_init(void){
-	printf("LCD Init");
+	printf("LCD Init\n");
 	return 0;
 }
 

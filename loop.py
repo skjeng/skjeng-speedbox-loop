@@ -1,5 +1,4 @@
 #!/usr/bin/python2
-#as aMain
 import sys
 import subprocess
 import getopt
@@ -10,7 +9,7 @@ import numpy
 import struct
 import requests
 
-lcd_script = "lcd_program"
+lcd_output_script = "lcd_program"
 update_script = "call_update.sh"
 upload_script = "upload.sh"
 download_script = "download.sh"
@@ -43,9 +42,8 @@ def popen( program, *arg ):
     return msg[0]
 
 
-def lcd_output(lcdpath, str1="", str2=""):
-    p = subprocess.Popen([lcdpath, str1.ljust(16), str2.ljust(16)], stdout=subprocess.PIPE)
-    #print(p.communicate())
+def lcd_output(str1="", str2=""):
+    msg = popen(lcd_output_script, str1.ljust(16), str2.ljust(16))
 
 def check_github():
     msg = popen(check_github_script)

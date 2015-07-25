@@ -15,7 +15,22 @@
 	#include <lcd_odroid.h>
 #endif
 
-int main(){
-	printf("LCD Panel Control Program\n");
+char a[16];
+char b[16];
+
+int main(int argc, char *argv[]){
+	if (argc > 1){
+		if (lcd_init() < 0){
+			printf("Failed init");
+			return -1;
+		}
+		strncpy(a, argv[1], 16);
+		strncpy(b, argv[2], 16);
+		printf("line1=%s\n", a);
+		printf("line2=%s\n", b);
+	} else {
+		printf("Too few arguments");
+	}
+
 	return 0;
 }
