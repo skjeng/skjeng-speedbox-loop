@@ -1,11 +1,9 @@
-all: lcd_program
+all: lcd.out led.out
 
 CC=gcc
 CCFLAGS=-Wall -I.
 DEPLOY_CCFLAGS=-lwiringPi -lwiringPiDev -lpthread
-
 DEPS = 
-OBJ = main.o
 
 ifeq ($(OS),Windows_NT)
 				CCFLAGS += -D WIN32
@@ -41,14 +39,14 @@ endif
 
 UNAME_P := $(shell uname -p)
 
-%.o: %.c $(DEPS)
-				$(CC) -c -o $@ $< $(CCFLAGS)
+lcd.out: lcd.c
+	gcc -o $@ $^ $(CCFLAGS) $(DEPLOY_CCFLAGS)
 
-lcd_program: $(OBJ)
-				gcc -o $@ $^ $(CCFLAGS)
+led.out: led.c
+	gcc -o $@ $^ $(CCFLAGS) $(DEPLOY_CCFLAGS)
 
 .PHONY: clean
 clean:
-	-rm $(OBJ)
+	-rm *.o
 
 # END
